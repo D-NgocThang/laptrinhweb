@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorities;
 use Hash;
 use Session;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Posts;
 use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,6 +71,7 @@ class CrudUserController extends Controller
         $check = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'soThich' => $data['soThich'],
             'password' => FacadesHash::make($data['password'])
         ]);
 
@@ -148,5 +152,25 @@ class CrudUserController extends Controller
         Auth::logout();
 
         return Redirect('login');
+    }
+
+    public function listpost()
+    {
+        if(Auth::check()){
+            $posts = Posts::all();
+            return view('listPost', ['posts' => $posts]);
+        }
+
+        return redirect("login")->withSuccess('You are not allowed to access');
+    }
+
+    public function listFavorities()
+    {
+       
+            $favorities = Favorities::all();
+            return view('listfavorities', ['favorities' => $favorities]);
+        
+
+        //return redirect("login")->withSuccess('You are not allowed to access');
     }
 }

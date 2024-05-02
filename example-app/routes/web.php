@@ -33,6 +33,11 @@ Route::get('list', [CrudUserController::class, 'listUser'])->name('user.list');
 
 Route::get('signout', [CrudUserController::class, 'signOut'])->name('signout');
 
+Route::get('listpost', [CrudUserController::class, 'listpost'])->name('listpost');
+
+Route::get('listFavorities', [CrudUserController::class, 'listFavorities'])->name('listFavorities');
+
 Route::get('/', function () {
     return view('welcome');
 });
+

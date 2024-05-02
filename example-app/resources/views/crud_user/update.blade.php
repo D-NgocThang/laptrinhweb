@@ -28,6 +28,14 @@
                                     @endif
                                 </div>
                                 <div class="form-group mb-3">
+                                    <input type="text" placeholder="soThich" id="soThich" class="form-control" name="soThich"
+                                           value="{!! $user->soThich !!}"
+                                           required autofocus>
+                                    @if ($errors->has('soThich'))
+                                        <span class="text-danger">{!! $errors->first('soThich') !!}</span>
+                                    @endif
+                                </div>
+                                <div class="form-group mb-3">
                                     <input type="password" placeholder="Password" id="password" class="form-control"
                                            name="password" required>
                                     @if ($errors->has('password'))
