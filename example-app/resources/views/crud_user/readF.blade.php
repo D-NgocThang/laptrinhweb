@@ -47,11 +47,11 @@
                         <p>{{ $post->post_description }}</p>
                     @endforeach
                     <h1>so thich</h1>
-                    {{-- @foreach ($st as $st)
+                    @foreach ($st as $st)
                     <p>{{ $st->favorite_name }}</p>
                     <p>{{ $st->favorite_description }}</p>
                     @endforeach
-                    --}}
+                   
                   
 
                 </div>

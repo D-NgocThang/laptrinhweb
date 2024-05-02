@@ -106,20 +106,27 @@ class CrudUserController extends Controller
         if (!$user) {
             return redirect("list")->withError('Người dùng không tồn tại');
         }
+        // truy vấn tìm bài viết của người dùng
         $user_profile = Profile::where('user_id', $user_id)->first();
         if (!$user_profile) {
-            return redirect("list")->withError('Thông tin người dùng không tồn tại trong hồ sơ');
+            return redirect("list")->withError('người dùng không có bài viết');
         }
-        
+        //tim xem nguoi dung có sở thích không
         $sothich = DB::table('user_favorite')->where('user_id', $user_id)->first();
         if (!$sothich) {
             return redirect("list")->withError('người dùng khong có sở thích');
         }
-       
-        //$tenst = Favorities::wherewhere('favorite_id', $user_id)->first();
+        
+        // lấy id sở thích
+        $favorite_id = $sothich->favorite_id;
+        
+        //truy vấn dựa vài id sở thích tìm sở thích người dùng
+        $tenst = Favorities::where('favorite_id', $favorite_id)->get();
 
+        //truy vấn tìm bà viết của người dùng
         $user_posts = Posts::where('user_id', $user_id)->get();
-        return view('crud_user.readF', ['messi' => $user_profile, 'posts' => $user_posts]);
+
+        return view('crud_user.readF', ['messi' => $user_profile, 'posts' => $user_posts, 'st' => $tenst]);
     }
 
 
